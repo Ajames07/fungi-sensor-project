@@ -15,6 +15,11 @@ const Nav = () => (
             Info Page
           </Link>
         </li>
+        <li>
+          <Link to="/sensor">
+          Sensor Data Page
+          </Link>
+        </li>
       </ul>
     </div>
   </div>

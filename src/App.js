@@ -13,6 +13,7 @@ import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
 
 import './styles/main.css';
+import SensorDataForm from './components/SensorDataForm/SensorDataForm';
 
 const App = () => (
   <div>
@@ -35,6 +36,10 @@ const App = () => (
         <Route
           path="/info"
           component={InfoPage}
+        />
+        <Route
+          path="/sensor"
+          component={SensorDataForm} 
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
