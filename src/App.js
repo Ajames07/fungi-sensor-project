@@ -11,9 +11,9 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
-
+import SensorDataForm from './components/SensorDataForm/SensorDataForm.js';
 import './styles/main.css';
-import SensorDataForm from './components/SensorDataForm/SensorDataForm';
+
 
 const App = () => (
   <div>
