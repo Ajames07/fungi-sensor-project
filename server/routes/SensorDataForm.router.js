@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req,res) => {
     const queryText = 'SELECT * FROM readings WHERE id =$1';
     pool.query(queryText, [req.params.id])
-    .then((results) => { res.send(result.rows); })
+    .then((results) => { res.send(results.rows); })
     .catch((error) => {
         console.log('Error completing SELECT reading query', error);
         res.sendStatus(500);
