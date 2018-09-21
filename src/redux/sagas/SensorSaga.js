@@ -6,7 +6,7 @@ function* sensorDisplay(action) {
     try {
         const sensorResponse = yield call(axios.post, '/api/sensor', action.payload);
             const responseAction = { type: 'GET_DATA', payload: sensorResponse.data }
-            yield put(responseAction);
+            //yield put(responseAction);
     }catch(error) {
         console.log(error);
         alert('unable to post sensor data',error);

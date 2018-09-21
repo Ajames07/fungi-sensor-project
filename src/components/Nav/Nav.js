@@ -20,6 +20,11 @@ const Nav = () => (
           Sensor Data Page
           </Link>
         </li>
+        <li>
+        <Link to="/notes">
+          Personal Notes
+          </Link>
+        </li>
       </ul>
     </div>
   </div>
