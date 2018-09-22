@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
     }).catch((error) => {
         console.log('error making POST request', error);
         res.sendStatus(500);
-    })
+    });
 });
 
 module.exports = router;

@@ -42,25 +42,27 @@ class SensorDataForm extends Component {
 
     return (
     <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Temperature</th>
-                    <th>Humidity</th>
-                    <th>Lux</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>27.77C/82F</td>
-                    <td>80%</td>
-                    <td>350</td>
-                    <td>14:55 pm</td>
-                </tr>
-            </tbody>
-        </table>
-        <Nav />
+        <div>
+            <Nav />
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Temperature</th>
+                        <th>Humidity</th>
+                        <th>Lux</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>27.77C / 82F</td>
+                        <td>80%</td>
+                        <td>350</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         {JSON.stringify(this.state)}
         <div>
             <form onSubmit={this.handleDataSubmit}>

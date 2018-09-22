@@ -17,12 +17,12 @@ const Nav = () => (
         </li>
         <li>
           <Link to="/sensor">
-          Sensor Data Page
+            Sensor Data Page
           </Link>
         </li>
         <li>
-        <Link to="/notes">
-          Personal Notes
+          <Link to="/notes">
+            Personal Notes
           </Link>
         </li>
       </ul>
