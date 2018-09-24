@@ -3,7 +3,7 @@ import Nav from '../../components/Nav/Nav';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
-    sensorDataList: state.sensorDataList,
+    sensorDataList: state.sensorDataList.SensorDataList
 });
  
 class SensorDataForm extends Component {
@@ -12,7 +12,12 @@ class SensorDataForm extends Component {
             temperature: '',
             humidity: '',
             lux: ''
-        }
+        },
+        sensorDataArray: []
+    }
+
+    componentDidMount () {
+        this.props.dispatch({type: 'GET_DATA'});
     }
 
 
@@ -27,6 +32,7 @@ class SensorDataForm extends Component {
     }
 
     handleDataSubmit = (event) => {
+        console.log('in handleDataSubmit');
         event.preventDefault();
         this.props.dispatch({ type: 'POST_DATA', payload:this.state.sensorInfo})
         this.setState({
@@ -39,7 +45,6 @@ class SensorDataForm extends Component {
     }
 
   render() {
-
     return (
     <div>
         <div>
@@ -55,15 +60,19 @@ class SensorDataForm extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>27.77C / 82F</td>
-                        <td>80%</td>
-                        <td>350</td>
-                    </tr>
+                    {this.props.sensorDataList.map((sensor,i) => {
+                        return (
+                            <tr key={i}>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        )
+                    })} 
                 </tbody>
             </table>
         </div>
-        {JSON.stringify(this.state)}
+        {JSON.stringify(this.props.sensorDataList)}
         <div>
             <form onSubmit={this.handleDataSubmit}>
                 <div>
@@ -72,7 +81,7 @@ class SensorDataForm extends Component {
                 </div>
                 <div>
                     <label>Humidity:</label>
-                    <input  type="text" value={this.state.sensorInfo.humidity} onChange={this.handleInputChange('humidity')}  placeholder="Humidity"/>
+                    <input type="text" value={this.state.sensorInfo.humidity} onChange={this.handleInputChange('humidity')}  placeholder="Humidity"/>
                 </div>
                 <div>
                     <label>LuX:</label>

@@ -1,6 +1,7 @@
-const cron = require ('node-cron');
-const axios = require ('axios');
+const cron = require('node-cron');
+const axios = require('axios');
 const express = require('express');
+const pool = require('./modules/pool');
 require('dotenv').config();
 
 const app = express();
@@ -16,7 +17,9 @@ const personalNotes = require('./routes/notes.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // Passport Session Configuration //
 app.use(sessionMiddleware);
@@ -34,9 +37,9 @@ app.use(express.static('build'));
 
 //device connection
 // Make a request for data every 30 minutes
-cron.schedule('*/30 * * * *', function(){
+cron.schedule('*/30 * * * *', function () {
   console.log('running a task every 30 minutes');
- particleData();
+  particleData();
 });
 
 //run the server once when the device boots up
@@ -45,9 +48,16 @@ particleData();
 function particleData() {
   axios.get(`https://api.spark.io/v1/devices/${process.env.DEVICE_ID}/result?access_token=${process.env.TOKEN}`).then(function (response) {
     // TODO: Save results in the database
-    const result = response.data.result;
-    console.log(result);
+    const newSensorData = JSON.parse(response.data.result);
+    console.log(newSensorData);
     // INSERT INTO using a pg pool
+    const queryText = `INSERT INTO readings ("temperature","humidity","lux")
+    Values ($1,$2,$3)`;
+    pool.query(queryText, [newSensorData.temp, newSensorData.humidity, newSensorData.lux])
+      .then((results) => {
+      }).catch((error) => {
+        console.log('error making POST request', error);
+      });
   }).catch(function (error) {
     console.log(error);
   });
