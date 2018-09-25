@@ -7,7 +7,7 @@ router.get('/', (req,res) => {
     pool.query(queryText)
     .then((results) => { res.send(results.rows); })
     .catch((error) => {
-        console.log('Error completeing SELCECT from readings query', error);
+        console.log('Error completeing SELECT from readings query', error);
         res.sendStatus(500);
     });
 });

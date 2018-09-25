@@ -6,7 +6,7 @@ function* sensorDisplay(action) {
     try {
         const sensorResponse = yield call(axios.post, '/api/sensor', action.payload);
             const responseAction = { type: 'GET_DATA', payload: sensorResponse.data }
-            //yield put(responseAction);
+            yield put(responseAction);
     }catch(error) {
         console.log(error);
         alert('unable to post sensor data',error);
@@ -22,12 +22,24 @@ function* sensorRetrieve(action) {
     }catch(error) {
         console.log(error);
         alert('unable to get data', error);
+    }   
+}
+
+function* sensorEdit(action) {
+    console.log('put sensor saga with action', action);
+    try {
+        const sensorResponse = yield call(axios.put, `/api/sensor/${action.payload.id}`, action.payload);
+            const responseAction = { type: 'GET_DATA', payload: sensorResponse.data }
+            yield put(responseAction);
+    }catch(error) {
+        console.log(error);
+        alert('unable to post sensor data',error);
     }
-    
 }
 
 function* SensorSaga() {
     yield takeLatest('POST_DATA', sensorDisplay);
     yield takeLatest('GET_DATA', sensorRetrieve);
+    yield takeLatest('PUT_DATA', sensorEdit);
   }
 export default SensorSaga;

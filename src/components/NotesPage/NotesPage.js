@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Nav from '../../components/Nav/Nav';
 import { connect } from 'react-redux';
 
+const mapStateToProps = state => ({
+  personalNotesList: state.personalNotesList
+})
+
 class NotesPage extends Component {
   state = {
     notesRecord: {
@@ -9,12 +13,21 @@ class NotesPage extends Component {
     }
   }
 
-  handleNotesSubmit = (event) => {
-    console.log('in handleNotesSubmit');
-    event.preventDefault();
-    this.props.dispatch({ type: })
-    
+  handleNotesChange = (event) => {
+    console.log('in handleNotesChange', event.target);
+    this.setState({
+      notesRecord: {
+        notes: event.target.value,
+      }
+    });
   }
+
+  // handleNotesSubmit = (event) => {
+  //   console.log('in handleNotesSubmit');
+  //   event.preventDefault();
+  //   this.props.dispatch({ type: })
+    
+  // }
 
   render() {
     return (
@@ -25,7 +38,9 @@ class NotesPage extends Component {
         <table>
             <thead>
                 <tr>
-                   Notes
+                  <th>
+                   Notes:
+                  </th> 
                 </tr>
             </thead>
             <tbody>
@@ -38,7 +53,7 @@ class NotesPage extends Component {
                 <label>
                   Enter notes and observations here:
                 </label>
-                <input type="text" value={this.state.notesRecord.notes} placeholder="Notes and observations"/>
+                <input type="text" onChange={this.handleNotesChange} value={this.state.notesRecord.notes} placeholder="Notes and observations"/>
               </div>
               <div>
                 <button type="submit">Submit</button>
@@ -50,4 +65,4 @@ class NotesPage extends Component {
   }
 }
 
-export default connect(NotesPage);
+export default connect(mapStateToProps)(NotesPage);

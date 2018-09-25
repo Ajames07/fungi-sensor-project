@@ -12,7 +12,9 @@ import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import SensorDataForm from './components/SensorDataForm/SensorDataForm.js';
+import NotesPage from './components/NotesPage/NotesPage.js';
 import './styles/main.css';
+
 
 
 const App = () => (
@@ -40,6 +42,10 @@ const App = () => (
         <Route
           path="/sensor"
           component={SensorDataForm} 
+        />
+        <Route
+        path="/notes"
+        component={NotesPage}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />

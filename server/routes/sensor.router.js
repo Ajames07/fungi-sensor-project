@@ -42,4 +42,27 @@ router.post('/', (req, res) => {
     });
 });
 
+router.put('/:id', ( req, res ) =>{
+    const updatedSensorData = req.body;
+    const queryText = `UPDATE readings 
+    SET "temperature" = $1,
+    "humidity" = $2,
+    "lux" = $3
+    WHERE id = $4;`;
+
+    const queryValues = [
+        updatedSensorData.temperature,
+        updatedSensorData.humidity,
+        updatedSensorData.lux,
+        req.params.id,
+    ];
+
+    pool.query(queryText, queryValues)
+    .then(() => { res.sendStatus(200); })
+    .catch((error) => {
+        console.log('Error completing SELECT readings', error);
+        res.sendStatus(500);
+    });
+});
+
 module.exports = router;
