@@ -14,6 +14,7 @@ class SensorDataForm extends Component {
             lux: '',
             date: '',
         },
+        //this is utilized in sensorEdit
         sensorDataArray: [],
         isUpdating: false,
         updatingId: 0
@@ -36,7 +37,7 @@ class SensorDataForm extends Component {
     }
 
     handleDataSubmit = (event) => {
-        //takes data from input and submits them to database and dom
+        //takes data from input and submits them to database and displays information on dom
         console.log('in handleDataSubmit');
         event.preventDefault();
         if(this.state.isUpdating){
@@ -64,6 +65,7 @@ class SensorDataForm extends Component {
     }
 
     sensorEdit = (sensor) => (event) => {
+        //this edits temperature and humidity in the sensorForum table
         this.setState({
             sensorInfo: {
                 temperature: sensor.temperature,

@@ -7,11 +7,17 @@ const mapStateToProps = state => ({
 })
 
 class NotesPage extends Component {
-  state = {
-    notesRecord: {
-      notes: '',
+  constructor (props){
+    super(props)
+
+    this.state = {
+      notesRecord: {
+        notes: '',
+      }
     }
   }
+
+  
 
   handleNotesChange = (event) => {
     console.log('in handleNotesChange', event.target);
@@ -26,6 +32,7 @@ class NotesPage extends Component {
     console.log('in handleNotesSubmit');
     event.preventDefault();
     
+    this.props.addNotes(this.state.notes);
   }
 
   render() {
