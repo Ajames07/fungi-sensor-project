@@ -5,8 +5,8 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
-    const queryText = 'SELECT id, temperature, humidity, lux FROM readings ORDER BY date DESC';
+router.get('/', ( req , res ) => {
+    const queryText = 'SELECT * FROM readings ORDER BY date DESC';
     pool.query(queryText)
     .then((results) => { res.send(results.rows); })
     .catch((error) => {
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req,res) => {
+router.get('/:id', ( req , res ) => {
     const queryText = 'SELECT * FROM readings WHERE id =$1';
     pool.query(queryText, [req.params.id])
     .then((results) => { res.send(results.rows); })
@@ -28,12 +28,12 @@ router.get('/:id', (req,res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', ( req , res ) => {
     console.log(req.body);
     const newSensorData = req.body;
-    const queryText =`INSERT INTO readings ("temperature","humidity","lux")
-                        Values ($1,$2,$3)`;
-    pool.query(queryText, [newSensorData.temperature,newSensorData.humidity,newSensorData.lux])
+    const queryText =`INSERT INTO readings ("temperature","humidity")
+                        Values ($1,$2)`;
+    pool.query(queryText, [newSensorData.temperature,newSensorData.humidity])
     .then((results) => {
        res.sendStatus(200);
     }).catch((error) => {
@@ -42,18 +42,18 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:id', ( req, res ) =>{
+router.put('/:id', ( req , res ) => {
     const updatedSensorData = req.body;
     const queryText = `UPDATE readings 
     SET "temperature" = $1,
     "humidity" = $2,
-    "lux" = $3
-    WHERE id = $4;`;
+    "date" =$4,
+    WHERE id = $5;`;
 
     const queryValues = [
         updatedSensorData.temperature,
         updatedSensorData.humidity,
-        updatedSensorData.lux,
+        updatedSensorData.date,
         req.params.id,
     ];
 
@@ -61,6 +61,17 @@ router.put('/:id', ( req, res ) =>{
     .then(() => { res.sendStatus(200); })
     .catch((error) => {
         console.log('Error completing SELECT readings', error);
+        res.sendStatus(500);
+    });
+});
+
+router.delete('/:id', ( req , res ) => {
+    console.log('delete Sensor data with id: ', req.body);
+    const queryText = 'DELETE FROM readings WHERE id = $1';
+    pool.query(queryText, [req.params.id])
+    .then(() => { res.sendStatus(200); })
+    .catch((error) => {
+        console.log('Error completing DELETE reading query', error);
         res.sendStatus(500);
     });
 });

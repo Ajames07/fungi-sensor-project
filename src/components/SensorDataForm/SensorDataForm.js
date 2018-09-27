@@ -11,7 +11,8 @@ class SensorDataForm extends Component {
         sensorInfo: {
             temperature: '',
             humidity: '',
-            lux: ''
+            lux: '',
+            date: '',
         },
         sensorDataArray: [],
         isUpdating: false,
@@ -44,20 +45,22 @@ class SensorDataForm extends Component {
             sensorInfo: {
                 temperature: '',
                 humidity: '',
-                lux: ''
+                lux: '',
+                date: '',
             },
             isUpdating: false,
-        updatingId: 0
+            updatingId: 0
         }); 
-    }else {
+        } else {
          this.props.dispatch({ type: 'POST_DATA', payload: this.state.sensorInfo })
-        this.setState({
-            sensorInfo: {
-                temperature: '',
-                humidity: '',
-                lux: ''
-            }
-        });   
+            this.setState({
+                sensorInfo: {
+                    temperature: '',
+                    humidity: '',
+                    lux: '',
+                    date: ''
+                }
+            });   
         }
         
     }
@@ -68,14 +71,20 @@ class SensorDataForm extends Component {
                 temperature: sensor.temperature,
                 humidity: sensor.humidity,
                 lux: sensor.lux,
+                date: sensor.date,
             },
             isUpdating: true,
-        updatingId: sensor.id
+            updatingId: sensor.id
         });
+    }
+
+    sensorDataDelete = (sensor) => {
+        this.props.dispatch({ type: 'DELETE_DATA', payload: sensor})
     }
 
 
   render() {
+      
     return (
     <div>
         <div>
@@ -88,6 +97,7 @@ class SensorDataForm extends Component {
                         <th>Temperature</th>
                         <th>Humidity</th>
                         <th>Lux</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,8 +107,9 @@ class SensorDataForm extends Component {
                                 <td>{sensor.temperature}</td>
                                 <td>{sensor.humidity}</td>
                                 <td>{sensor.lux}</td>
-                                <td><button onClick={this.sensorEdit(sensor)}>Edit</button></td>
-                                <td><button>Delete</button></td>
+                                <td>{sensor.date}</td>
+                                <td><button onClick={() => this.sensorEdit(sensor)}>Edit</button></td>
+                                <td><button onClick={() => this.sensorDataDelete(sensor.id)}>Delete</button></td>
                             </tr>
                         )
                     })} 

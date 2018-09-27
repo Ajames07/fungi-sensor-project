@@ -17,6 +17,8 @@ function* sensorRetrieve(action) {
     console.log('get sensor saga with action', action);
     try {
         const sensorResponse = yield call(axios.get, '/api/sensor');
+        console.log(sensorResponse);
+        
         const responseAction = { type: 'FETCH_DATA', payload: sensorResponse.data }
         yield put(responseAction);
     }catch(error) {
@@ -33,7 +35,18 @@ function* sensorEdit(action) {
             yield put(responseAction);
     }catch(error) {
         console.log(error);
-        alert('unable to post sensor data',error);
+        alert('unable to edit sensor data', error);
+    }
+}
+
+function* sensorDataDelete(action) {
+    console.log('delete sensor saga with action', action);
+    try {
+        const sensorResponse = yield call(axios.delete, `/api/sensor/${action.payload}`);
+        yield put({ type: 'GET_DATA' }); 
+    }catch(error) {
+        console.log(error);
+        alert('unable to delete sensor data', error)
     }
 }
 
@@ -41,5 +54,6 @@ function* SensorSaga() {
     yield takeLatest('POST_DATA', sensorDisplay);
     yield takeLatest('GET_DATA', sensorRetrieve);
     yield takeLatest('PUT_DATA', sensorEdit);
+    yield takeLatest('DELETE_DATA', sensorDataDelete);
   }
 export default SensorSaga;

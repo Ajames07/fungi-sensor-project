@@ -22,12 +22,11 @@ class NotesPage extends Component {
     });
   }
 
-  // handleNotesSubmit = (event) => {
-  //   console.log('in handleNotesSubmit');
-  //   event.preventDefault();
-  //   this.props.dispatch({ type: })
+  handleNotesSubmit = (event) => {
+    console.log('in handleNotesSubmit');
+    event.preventDefault();
     
-  // }
+  }
 
   render() {
     return (

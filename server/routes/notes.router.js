@@ -36,4 +36,20 @@ router.post('/', ( req, res ) => {
     });
 });
 
+router.put('/:id', ( req , res ) => {
+    const updatePersonalNotes = req.body;
+    const queryText = `UPDATE person SET "notes" = $1, WHERE id = $2;`;
+
+    const queryValues = [
+        updatePersonalNotes.notes,
+        req.params.id,
+    ];
+
+    pool.query(queryText,queryValues)
+    .then(() => {res.sendStatus(200); })
+    .catch((error) => {
+        console.log('Error completing SELECT person', error);
+        res.sendStatus(500);
+    });
+});
 module.exports = router;
