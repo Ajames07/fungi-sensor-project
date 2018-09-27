@@ -46,14 +46,12 @@ router.put('/:id', ( req , res ) => {
     const updatedSensorData = req.body;
     const queryText = `UPDATE readings 
     SET "temperature" = $1,
-    "humidity" = $2,
-    "date" =$4,
-    WHERE id = $5;`;
+    "humidity" = $2
+    WHERE id = $3;`;
 
     const queryValues = [
         updatedSensorData.temperature,
         updatedSensorData.humidity,
-        updatedSensorData.date,
         req.params.id,
     ];
 

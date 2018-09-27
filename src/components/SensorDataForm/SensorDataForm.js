@@ -45,7 +45,6 @@ class SensorDataForm extends Component {
             sensorInfo: {
                 temperature: '',
                 humidity: '',
-                lux: '',
                 date: '',
             },
             isUpdating: false,
@@ -57,7 +56,6 @@ class SensorDataForm extends Component {
                 sensorInfo: {
                     temperature: '',
                     humidity: '',
-                    lux: '',
                     date: ''
                 }
             });   
@@ -70,7 +68,6 @@ class SensorDataForm extends Component {
             sensorInfo: {
                 temperature: sensor.temperature,
                 humidity: sensor.humidity,
-                lux: sensor.lux,
                 date: sensor.date,
             },
             isUpdating: true,
@@ -96,7 +93,6 @@ class SensorDataForm extends Component {
                     <tr>
                         <th>Temperature</th>
                         <th>Humidity</th>
-                        <th>Lux</th>
                         <th>Date</th>
                     </tr>
                 </thead>
@@ -106,9 +102,8 @@ class SensorDataForm extends Component {
                             <tr key={i}>
                                 <td>{sensor.temperature}</td>
                                 <td>{sensor.humidity}</td>
-                                <td>{sensor.lux}</td>
                                 <td>{sensor.date}</td>
-                                <td><button onClick={() => this.sensorEdit(sensor)}>Edit</button></td>
+                                <td><button onClick={this.sensorEdit(sensor)}>Edit</button></td>
                                 <td><button onClick={() => this.sensorDataDelete(sensor.id)}>Delete</button></td>
                             </tr>
                         )
@@ -125,10 +120,6 @@ class SensorDataForm extends Component {
                 <div>
                     <label>Humidity:</label>
                     <input type="text" value={this.state.sensorInfo.humidity} onChange={this.handleInputChange('humidity')}  placeholder="Humidity"/>
-                </div>
-                <div>
-                    <label>LuX:</label>
-                    <input type="text" value={this.state.sensorInfo.lux} onChange={this.handleInputChange('lux')} placeholder="LuX"/>
                 </div>
                 <div>
                     <button type="submit">Submit</button>
