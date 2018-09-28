@@ -12,7 +12,7 @@ import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import SensorDataForm from './components/SensorDataForm/SensorDataForm.js';
-import NotesPage from './components/NotesPage/NotesPage.js';
+import Notes from './components/Notes/Notes.js'
 import './styles/main.css';
 
 
@@ -45,7 +45,7 @@ const App = () => (
         />
         <Route
         path="/notes"
-        component={NotesPage}
+        component={Notes}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />

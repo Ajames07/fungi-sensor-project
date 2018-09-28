@@ -50,10 +50,11 @@ function* sensorDataDelete(action) {
     }
 }
 
-function* SensorSaga() {
+function* sensorSaga() {
     yield takeLatest('POST_DATA', sensorDisplay);
     yield takeLatest('GET_DATA', sensorRetrieve);
     yield takeLatest('PUT_DATA', sensorEdit);
     yield takeLatest('DELETE_DATA', sensorDataDelete);
-  }
-export default SensorSaga;
+}
+
+export default sensorSaga;

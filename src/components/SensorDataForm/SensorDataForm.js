@@ -11,7 +11,6 @@ class SensorDataForm extends Component {
         sensorInfo: {
             temperature: '',
             humidity: '',
-            lux: '',
             date: '',
         },
         //this is utilized in sensorEdit

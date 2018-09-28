@@ -13,7 +13,7 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const sensorDataForm = require('./routes/sensor.router');
-const personalNotes = require('./routes/notes.router');
+const notesRouter = require('./routes/notes.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,7 +31,7 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/sensor', sensorDataForm);
-app.use('/api/notes', personalNotes);
+app.use('/api/notes', notesRouter);
 // Serve static files
 app.use(express.static('build'));
 
@@ -51,9 +51,9 @@ function particleData() {
     const newSensorData = JSON.parse(response.data.result);
     console.log(newSensorData);
     // INSERT INTO using a pg pool
-    const queryText = `INSERT INTO readings ("temperature","humidity","lux")
-    Values ($1,$2,$3)`;
-    pool.query(queryText, [newSensorData.temp, newSensorData.humidity, newSensorData.lux])
+    const queryText = `INSERT INTO readings ("temperature","humidity")
+    Values ($1,$2)`;
+    pool.query(queryText, [newSensorData.temp, newSensorData.humidity])
       .then((results) => {
       }).catch((error) => {
         console.log('error making POST request', error);
