@@ -1,8 +1,8 @@
-import { combineReducer } from 'redux';
+import { combineReducers } from 'redux';
 
 const notesData = [];
 
-const notesDataList = (state = [{}], action) => {
+const notesDataList = (state = notesData, action) => {
     switch (action.type) {
         case 'RETRIEVE_NOTES' :
         return action.payload
@@ -11,4 +11,6 @@ const notesDataList = (state = [{}], action) => {
     }
 };
 
-export default   notesDataList;
+export default combineReducers({
+    notesDataList,
+});

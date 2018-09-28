@@ -33,4 +33,4 @@ import NotesForum from '../NotesForum/NotesForum';
   }
 }
 
-export default Notes;
+export default connect()(Notes);

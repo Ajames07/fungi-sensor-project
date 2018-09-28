@@ -65,8 +65,8 @@ function* updateNotes(action) {
 function* notesSaga() {
     yield takeLatest('POST_DATA', notesDisplay);
     yield takeLatest('GET_DATA', notesRetrieve);
-    yield takeLatest('PUT_DATA', notesEdit);
-    yield takeLatest('DELETE_DATA', notesDataDelete);
+    // yield takeLatest('PUT_DATA', notesEdit);
+    // yield takeLatest('DELETE_DATA', notesDataDelete);
     yield takeLatest('UPDATE_NOTES', updateNotes);
 }
 

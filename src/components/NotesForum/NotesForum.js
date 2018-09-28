@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
         super(props);
 
             this.state = {
-                notes :this.props.state.notesDataList[0].notes,
+                notes :this.props.state.notesDataList.notes,
         };
     }
 
@@ -53,7 +53,7 @@ const mapStateToProps = state => ({
               <div>
                 <button type="submit">Submit</button>
               </div>
-              <p>{JSON.stringify(this.props.state.notesDataList[0].notes)}</p> 
+              <p>{JSON.stringify(this.props.state.notesDataList.notes)}</p> 
             </form>
       </div>
     )
